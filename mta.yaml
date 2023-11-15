@@ -1,0 +1,132 @@
+_schema-version: "3.1"
+ID: D-ESG
+description: A simple CAP project.
+version: 1.0.0
+modules:
+  - name: D-ESG-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: D-ESG-auth
+      - name: NETWORKGRAPH-hdiGRAPH-db-deployer-ws-m2t5z
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+  - name: D-ESG-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: D-ESG-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - desg.zip
+          name: desg
+          target-path: resources/
+  # - name: main
+  #   type: html5
+  #   path: main
+  #   build-parameters:
+  #     build-result: dist
+  #     builder: custom
+  #     commands:
+  #       - npm install
+  #       - npm run build:cf
+  #     supported-platforms:
+  #       []
+  - name: desg
+    type: html5
+    path: app/desg
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+  - name: D-ESG
+    type: approuter.nodejs
+    path: app/
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv-api
+          url: ~{srv-url}
+      - name: D-ESG-auth
+      - name: D-ESG-destination-service
+        group: destinations
+        properties:
+          forwardAuthToken: false
+          name: ui5
+          url: https://ui5.sap.com
+    parameters:
+      disk-quota: 512M
+      keep-existing-routes: true
+      memory: 512M
+
+
+  - name: D-ESG-db-deployer
+    type: hdb
+    path: db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: NETWORKGRAPH-hdiGRAPH-db-deployer-ws-m2t5z
+resources:
+  - name: D-ESG-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: D-ESG-html5-srv
+      service-plan: app-host
+  - name: D-ESG-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: D-ESG-destination-service
+      service-plan: lite
+  - name: D-ESG-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: D-ESG-Abeam-gsp-lab6-${space}
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: NETWORKGRAPH-hdiGRAPH-db-deployer-ws-m2t5z
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production

@@ -1,0 +1,187 @@
+<mvc:View controllerName="desg.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:h="http://www.w3.org/1999/xhtml">
+    <Page id="page" title="{i18n>title}">
+        <h:div id="content" class="content">
+            <h:div id="main" class="main">
+                <h:div id="row_header" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_checkbox">Analytics Method</h:h5>
+                    </h:div>
+                    <h:div class="col_content col_header_checkbox">
+                        <h:h5 class="content_checkbox">Overview Analysis</h:h5>
+                        <CheckBox id="cb_overview" selected="{/overview/status/external}" select="onSelectCheckbox" tooltip="{i18n>tooltip_checkbox}"></CheckBox>
+                    </h:div>
+                    <h:div class="col_content col_header_checkbox">
+                        <h:h5 class="content_checkbox">Value Relevance Chart</h:h5>
+                        <CheckBox id="cb_value" selected="{/value/status/external}" select="onSelectCheckbox" tooltip="{i18n>tooltip_checkbox}"></CheckBox>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_1" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_objective1">Objective 1</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_objective1" class="input_content" valueState="{/overview/objective1/state}" valueStateText="{i18n>tooltip_obj1}" showValueHelp="true" valueHelpRequest="onOpenMearsureValueHelp" valueHelpOnly="true" value="{/overview/objective1/external}" required="true" tooltip="{i18n>tooltip_obj1}" ></Input>  
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_objective1" class="input_content" valueState="{/value/objective1/state}" valueStateText="{i18n>tooltip_obj1}" showValueHelp="true"  valueHelpOnly="true" valueHelpRequest="onOpenMearsureValueHelp" value="{/value/objective1/external}" tooltip="{i18n>tooltip_obj1}"></Input>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_2" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_objective2">Objective 2</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_objective2" class="input_content" enabled="false" valueState="{/overview/objective2/state}" valueStateText="{i18n>tooltip_obj2}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onOpenMearsureValueHelp" value="{/overview/objective2/external}" tooltip="{i18n>tooltip_obj2}"></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_objective2" class="input_content" valueState="{/value/objective2/state}" valueStateText="{i18n>tooltip_obj2}" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenMearsureValueHelp" value="{/value/objective2/external}" tooltip="{i18n>tooltip_obj2}"></Input>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_3" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_subjective1">Subjective 1</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_subjective1" class="input_content" valueState="{/overview/subjective1/state}" valueStateText="{i18n>tooltip_subj1}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onOpenMearsureValueHelp" value="{/overview/subjective1/external}" tooltip="{i18n>tooltip_subj1}"></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_subjective1" class="input_content" valueState="{/value/subjective1/state}" valueStateText="{i18n>tooltip_subj1}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onOpenMearsureValueHelp" value="{/value/subjective1/external}" tooltip="{i18n>tooltip_subj1}"></Input>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_4" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5>Logarithm</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <ComboBox 
+                            id="input_overview_logarithm"
+                            class="input_comboBox"
+                            tooltip="{i18n>tooltip_loga}"
+                            valueState="{/overview/logarithm/state}"
+                            valueStateText="{i18n>tooltip_loga}"
+				            items="{
+					        path: 'logarithmCollections>/value'
+				            }">
+				            <core:Item id="item_overview" key="{logarithmCollections>key}" text="{logarithmCollections>text}" />
+			            </ComboBox>
+                    </h:div>
+                    <h:div class="col_content">
+                        <ComboBox 
+                            id="input_value_logarithm"
+                            class="input_comboBox"
+                            tooltip="{i18n>tooltip_loga}"
+                            valueState="{/value/logarithm/state}"
+                            valueStateText="{i18n>tooltip_loga}"
+				            items="{
+					        path: 'logarithmCollections>/value'
+				            }">
+				            <core:Item id="item_value" key="{logarithmCollections>key}" text="{logarithmCollections>text}" />
+			            </ComboBox>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_5" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_rugsub">Rugsub</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_rugsub" class="input_content" valueState="{/overview/rugsub/state}" valueStateText="{i18n>tooltip_rug}" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenMearsureValueHelp" value="{/overview/rugsub/external}" tooltip="{i18n>tooltip_rug}"></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_rugsub" class="input_content" valueState="{/value/rugsub/state}" valueStateText="{i18n>tooltip_rug}" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenMearsureValueHelp" value="{/value/rugsub/external}" tooltip="{i18n>tooltip_rug}"></Input>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_6" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_subjective2">Subjective 2</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_subjective2" class="input_content" valueState="{/overview/subjective2/state}" valueStateText="{i18n>tooltip_subj2}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onOpenMearsureValueHelp" value="{/overview/subjective2/external}" tooltip="{i18n>tooltip_subj2}"></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_subjective2" class="input_content" enabled="false" valueState="{/input/subjective2/state}" valueStateText="{i18n>tooltip_subj2}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onOpenMearsureValueHelp" value="{/value/subjective2/external}" tooltip="{i18n>tooltip_subj2}"></Input>          
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_7" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_client">Analysis Name</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_client" class="input_content" valueState="{/overview/client/state}" valueStateText="{i18n>tooltip_client}" showValueHelp="true"  valueHelpRequest="onOpenOverviewClientValueHelp" value="{/overview/client/internal}" tooltip="{i18n>tooltip_client}"></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_client" class="input_content" valueState="{/value/client/state}" valueStateText="{i18n>tooltip_client}" showValueHelp="true"  valueHelpRequest="onOpenValueClientValueHelp" value="{/value/client/internal}" tooltip="{i18n>tooltip_client}"></Input>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_8" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5 id="title_client_item">Version</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_client_item" class="input_content" valueState="{/overview/client_item/state}" valueStateText="{i18n>tooltip_client}" showValueHelp="true"  valueHelpRequest="onOpenOverviewClientValueHelp" value="{/overview/client_item/internal}" ></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_client_item" class="input_content" enabled="false"></Input>
+                    </h:div>
+                </h:div>
+                <h:div id="row_input_9" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5>P Value</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_overview_pvalue" class="input_content" enabled="false" valueState="{/overview/pValue/state}" valueStateText="{i18n>tooltip_pValue}" value="{/overview/pValue/internal}" type="Number" tooltip="{i18n>tooltip_pValue}"></Input>
+                    </h:div>
+                    <h:div class="col_content">
+                        <Input id="input_value_pvalue" class="input_content" valueState="{/value/pValue/state}" valueStateText="{i18n>tooltip_pValue}"  value="{/value/pValue/internal}" type="Number" tooltip="{i18n>tooltip_pValue}"></Input>
+                     </h:div>
+                </h:div>
+                <h:div id="row_input_10" class="row_content">
+                    <h:div class="col_content">
+                        <h:h5>Year</h:h5>
+                    </h:div>
+                    <h:div class="col_content">
+                        <!-- <Input id="input_overview_year" class="input_content" valueState="{/overview/year/state}" valueStateText="{i18n>tooltip_year}"  value="{/overview/year/value}" type="Number" liveChange="onCheckValidInput" tooltip="{i18n>tooltip_year}"></Input> -->
+                        <StepInput
+                            id="input_overview_year"
+                            class="input_content"
+                            max="99"
+                            min="1"
+                            textAlign="Begin"
+                            value="{/overview/year/internal}"
+                            valueState="{/overview/year/state}"
+                            valueStateText="{i18n>tooltip_year}"
+                            tooltip="{i18n>tooltip_year}"
+                        >
+                            
+                        </StepInput>
+                    </h:div>
+                    <h:div class="col_content">
+                        <!-- <Input id="input_value_year" class="input_content" valueState="{/value/year/state}" valueStateText="{i18n>tooltip_year}" value="{/value/year/value}" type="Number" liveChange="onCheckValidInput" tooltip="{i18n>tooltip_year}"></Input>               -->
+                        <StepInput
+                            id="input_value_year"
+                            class="input_content"
+                            max="99"
+                            min="1"
+                            textAlign="Begin"
+                            value="{/value/year/internal}"
+                            valueState="{/value/year/state}"
+                            valueStateText="{i18n>tooltip_year}"
+                            tooltip="{i18n>tooltip_year}"
+                        >
+                            
+                        </StepInput>
+                    </h:div>
+                </h:div>
+            </h:div>
+        </h:div>
+        <footer>
+            <OverflowToolbar id="flow_footer">
+				<ToolbarSpacer id="space_footer"/>
+				<Button id="update_btn" text="Update" type="Accept" press="onUpdatePress" />
+			</OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

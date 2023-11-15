@@ -1,0 +1,54 @@
+@server = http://localhost:45829
+@server1 = http://localhost:37987 
+POST {{server}}/odata/v4/graph/upsertESGParameter
+headers: 
+      Content-Type: application/json
+
+{
+      "aParameter": [
+    {
+        "category": "2",
+        "usage_flag": "",
+        "objective1": "LAND_AREA",
+        "objective2": "GHG_S1",
+        "subjective1": "WTR_WITHDRAWAL",
+        "logarithm": "0",
+        "rugsub": "WTR_CONSUMPTION",
+        "subjective2": "GHG_S3",
+        "client": "GHG_TOT",
+        "pValue": 2.1,
+        "year": 1
+    },
+    {
+        "category": "1",
+        "usage_flag": "X",
+        "objective1": "PBR",
+        "objective2": "GHG_S1",
+        "subjective1": "WTR_WITHDRAWAL",
+        "logarithm": "1",
+        "rugsub": "WTR_CONSUMPTION",
+        "subjective2": "LAND_AREA",
+        "client": "GHG_TOT",
+        "pValue": 3.21,
+        "year": 1
+    }
+]
+}
+
+#######################################
+GET {{server}}/odata/v4/graph/ESGMeasureMaster
+
+#######################################
+GET {{server}}/odata/v4/graph/CLIENT_VIEW?$select=CLIENTKEY,TITLE
+
+#######################################
+GET {{server}}/odata/v4/graph/getClient()
+
+#######################################
+GET {{server}}/odata/v4/graph/getMeasureMaster()
+
+#######################################
+GET {{server}}/odata/v4/graph/ESGParameter
+
+#######################################
+GET {{server}}/odata/v4/graph/CLIENT_VIEW

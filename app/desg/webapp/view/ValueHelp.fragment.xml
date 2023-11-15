@@ -1,0 +1,35 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" >
+       <TableSelectDialog 
+        id="table_dialog" 
+        title="" 
+        confirm="onConfirmMearsureValueHelp"
+        noDataText="No Products Found"
+        search="handleMearsureSearch"
+        searchPlaceholder="Search data"
+        contentWidth="30%"
+        items="{
+         path: 'mearsureData>/data'
+        }">
+        <ColumnListItem id="list_item">
+         <cells>
+				<Text id="value_help_var" text="{mearsureData>var}" />
+				<Text id="value_help_varname" text="{mearsureData>var_name}" />
+			</cells>
+        </ColumnListItem>
+        <columns>
+         <Column id="col_var">
+            <header>
+					<Text id="text_var" text="Var"/>
+			   </header>
+         </Column>
+
+         <Column id="col_varname">
+            <header>
+					<Text id="text_varname" text="Varname" />
+			   </header>
+         </Column>
+        </columns>
+       </TableSelectDialog>
+</core:FragmentDefinition>

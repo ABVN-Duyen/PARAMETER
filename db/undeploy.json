@@ -1,0 +1,6 @@
+[
+  "src/gen/db.Esg_parameter.hdbtable",
+  "src/gen/GraphService.ESGParameter.hdbview",
+  "src/gen/**/*.hdbindex",
+  "src/gen/**/*.hdbconstraint"
+]
